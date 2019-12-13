@@ -1,2 +1,8 @@
 fish/*
+*.py[co]
 __pycache__
+*.pyc
+.cache
+.vscode
+
+.git
