@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %} Test MNIST {% endblock %}
+
+{% block main %} 
+    <h2 class="center">MNIST</h2>
+
+    <p class="center">We have a 60000 dataset of digit, and you can select which one you want to use for train, and testing.</p>
+
+    <h3>Training the network</h3>
+
+        <input type="text" placeholder="Start (eg: 0)" id="start">
+        <input type="text" placeholder="End (eg: 2000)" id="end">
+        <input type="text" placeholder="Epochs" id="epochs">
+        <input type="text" placeholder="Learning Rate" id="learning">
+
+        <p class="dl_text center">Finish !</p>
+        <div class="progress center pro1">
+            <div class="indeterminate"></div>
+        </div>
+
+        <button id="train" class="center btn blue darken-4 btn-lg">Train</button>
+
+    <h3>Test the network</h3>
+
+        <input type="text" placeholder="Start (eg: 0)" id="start_test">
+        <input type="text" placeholder="End (eg: 6)" id="end_test">
+
+        <div class="progress center pro2">
+            <div class="indeterminate"></div>
+        </div>
+    
+        <button id="test" class="center btn blue darken-4 btn-lg">Test</button><br><br>
+
+    
+    <div class="result">
+
+        <h3>Result</h3>
+
+        <div class="output"></div>
+
+    </div>
+
+   
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+    $(document).ready(function() {
+        $('.pro1').hide();
+        $('.pro2').hide();
+        $('.result').hide();
+        $('.dl_text').hide();
+
+        $("#train").click(function() {
+            $('#train').hide();
+			$('.pro1').show();
+
+            var start = $('#start').val()
+            var end = $('#end').val()
+            var epochs = $('#epochs').val()
+            var learning = $('#learning').val()
+			
+            $.ajax({
+                url: '{{ url_for("mnist_use") }}',
+                type: "POST",
+                data: "start="+start+"&end="+end+"&epochs="+epochs+"&learning="+learning,
+                success: function(rep) {
+                    $('.pro1').hide();
+                    $('.dl_text').show();
+                }
+            });
+        });
+
+
+        $("#test").click(function() {
+			$('.pro2').show();
+
+            var start = $('#start_test').val()
+            var end = $('#end_test').val()
+
+            $.ajax({
+                url: '{{ url_for("mnist_use") }}',
+                type: "GET",
+                data: "start="+start+"&end="+end,
+                success: function(rep) {
+                    $('.pro2').hide();
+
+                    var output = rep.output;
+                    var real = rep.real;
+
+                    var html = "";
+
+                    var i;
+                    for (i = 0; i < real.length; i++) {
+
+                        html += "<table>\
+                                <thead>\
+                                    <tr>\
+                                        <th>Output</th>\
+                                        <th>Real</th>\
+                                    </tr>\
+                                    <tbody>";
+
+                        var k;
+                        for (k = 0; k < real[i].length; k++) {
+                            html += "<tr>\
+                                <td>" + (output[i][0][k]).toFixed(2) + "</td>\
+                                <td>" + real[i][k] + "</td>\
+                                </td>";
+                        }
+
+                        html += "</tbody>\
+                                </thead>\
+                                </table>";
+                        html += "<br>"
+                    }
+
+                    $( ".output" ).html(html);
+
+                    $('.result').show();
+
+                }
+            });
+        });
+    });
+  
+
+</script>
+
+
+{% endblock %}
