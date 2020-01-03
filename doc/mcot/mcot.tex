@@ -1,0 +1,74 @@
+\documentclass[a4paper,11pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel} 
+
+\usepackage{lmodern} % Pour changer le pack de police
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+
+\usepackage{tabularx}
+
+\title{MCOT}
+\author{\textsc{Khouani} Cassim}
+
+
+\begin{document}
+
+\begin{center}
+\section*{Reconnaissance d'images en Machine Learning}
+\end{center}
+
+Avec le nombre grandissant de données que nous récoltons de nos jours, il est de plus en plus facile de faire de la reconnaissance d’images avec des algorithmes de Machine Learning. Il est donc intéressant de voir les limites de ces algorithmes et comment les mettre en place.\\
+
+\subsection*{Positionnement thématique (étape 1)}
+
+\begin{it}
+INFORMATIQUE ( Informatique Pratique ), MATHÉMATIQUES ( Algèbre, Autres domaines )
+\end{it}
+
+\subsection*{Mots-clés (étape 1)}
+
+\begin{tabular}{ll}  % c centrer l gauche r droite (centrage), les | pour mettre des lignes
+
+\textbf{Mots-Clés} (en français) & \textbf{Mots-Clés} (en anglais) \\
+\\
+Machine Learning & Machine Learning \\
+Reconnaissance d'images & Picture recognition\\
+Apprentissage profond & Deep Learning
+
+\end{tabular}
+
+\subsection*{Bibliographie commentée}
+
+Il y a de nos jours, beaucoup de moyens de faire de la reconnaissance d’images avec une intelligence artificielle. Cependant, depuis quelques années, on a de plus en plus de données, et d’images exploitables et c’est donc plus pratique d’utiliser un algorithme de Deep Learning. \cite{ref1} \\
+
+Pour créer le premier réseau de neurones, j’ai tout d’abord dû traduire les equations mathématiques de deep learning en python, en utilisant des matrices pour simplifier le code. \cite{ref2} \\
+
+Il faut maintenant pouvoir utiliser des images. Pour cela il faut transformer les images en tableaux numpy, tous de même taille, pour les entrer dans le réseau de neurone. Pour tester avec des images j’ai utilisé la banque d’images de chiffres de 1 à 9 (MNIST) , contenant énormément de données de test. \cite{ref3} \\
+
+Pour adapter cela aux espèces de poisson, il faut un nombre conséquant de données. Pour cela on peut en trouver sur internet, et je dois en avoir tous de la même taille et etiquetés pour pouvoir entrainer le réseau. J’ai du faire un script python pour mettre toutes les images dans une taille fixe. \cite{ref4} \\
+
+On peut maintenant essayer d’améliorer notre réseau en modifiant les paramètres du réseau et le nombre de neurones pour en avoir un plus performant. \cite{ref5} \\
+
+\subsection*{Problématique retenue}
+
+Je me propose donc de chercher à trouver le meilleur algortihme pour reconnaitre les éléments d'une image.
+
+\subsection*{Objectifs du TIPE}
+
+\begin{enumerate}
+
+\item Developper un réseau de neurones fonctionnant avec n’importe quel type de données et le tester avec des exemples simples.
+\item L’adapter avec des données de type image de manière à pouvoir effectuer de la reconnaissance d’image et le tester avec des images déjà faites à cet usage, des chiffres de 1 à 9 ( MNIST ).
+\item Trouver et exploiter assez d’images d’espèces de poisson différentes et les trier de manière à pouvoir entrainer notre réseau et qu’il fonctionne avec des images non entrainées
+\item Améliorer le processus et trouver les meilleurs paramètres pour avoir l’algorithme le plus stable possible, voir trouver un algorithme plus performant et les comparer.
+
+\end{enumerate}
+
+​\bibliographystyle{plain} % Le style
+\bibliography{mcot} % Le fichier de base de données.
+
+
+\end{document}
